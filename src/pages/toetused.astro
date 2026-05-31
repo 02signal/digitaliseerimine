@@ -1,0 +1,71 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digitaliseerimise toetused lihtsas keeles | Digitaliseerimine.ee</title>
+    <meta name="description" content="Millal tasub vaadata digiteekaardi, RTE tarkvara või muu digitaliseerimise toetuse poole ning millal teha väiksem töö oma rahaga." />
+    <link rel="canonical" href="https://digitaliseerimine.ee/toetused/" />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Digitaliseerimine.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/vanad-protsessid/">Vanad protsessid</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page white">
+      <div class="section-inner article">
+        <span class="kicker">Toetus ei ole eesmärk omaette</span>
+        <h1>Toetus aitab siis, kui ettevõttel on selge töö, mille kordategemine annab kasu.</h1>
+        <p>
+          Omaniku jaoks on tähtis lihtne küsimus: kas minu plaani saab teha toetusega ja kas see on üldse vaeva väärt?
+          Me aitame esmalt aru saada, mis töö vajab lahendust. Alles siis vaatame, kas sobiv toetus võib olla olemas.
+        </p>
+
+        <h2>Kui võib sobida digiteekaart</h2>
+        <p>
+          Kui ettevõttel on mitu digitaliseerimise teemat ja vaja on laiemat plaani,
+          võib õige järgmine samm olla digitaliseerimise teekaardi eelhindamine.
+          Selle jaoks kasutame eraldi lehte.
+        </p>
+        <p>
+          <a href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="support_page_digiteekaart">Digiteekaart.ee</a>
+          aitab kontrollida, kas EIS-i digiteekaardi suund võib sobida.
+        </p>
+
+        <h2>Kui võib sobida väiksem tarkvara või liidestus</h2>
+        <p>
+          Mõnikord ei ole vaja suurt teekaarti. Kui töö on kitsas ja praktiline, võib sobida väiksem töö:
+          vorm, andmebaas, automaatne teavitus, CRM-i korrastus või lihtne liidestus.
+        </p>
+
+        <h2>Kui toetust ei ole mõistlik oodata</h2>
+        <p>
+          Kui töö maksab vähe ja annab kiire võidu, võib olla mõistlikum teha see kohe ära.
+          Mõnikord maksab ootamine rohkem kui väike teostus.
+        </p>
+
+        <div class="inline-actions">
+          <a class="btn btn-primary" href="/#kontakt" data-track-event="cta_click" data-track-label="support_describe_work">Kirjeldan oma plaani</a>
+          <a class="btn btn-light" href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="support_to_digiteekaart">Kontrollin digiteekaarti</a>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,506 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const leadWebhookUrl = import.meta.env.PUBLIC_SITE_LEAD_WEBHOOK_URL ?? "";
+const emailHref = "mailto:info@02signal.ai?subject=Digitaliseerimine.ee%20-%20esimese%20too%20soovitus";
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://digitaliseerimine.ee/#organization",
+      name: "Digitaliseerimine.ee",
+      legalName: "Ettevõtluskeskus OÜ",
+      url: "https://digitaliseerimine.ee/",
+      email: "info@02signal.ai",
+      telephone: "+37258180435",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: "+37258180435",
+        email: "info@02signal.ai",
+        areaServed: "EE",
+        availableLanguage: ["et"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://digitaliseerimine.ee/#website",
+      name: "Digitaliseerimine.ee",
+      url: "https://digitaliseerimine.ee/",
+      publisher: { "@id": "https://digitaliseerimine.ee/#organization" },
+      inLanguage: "et"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://digitaliseerimine.ee/#service",
+      name: "Ettevõtte esimese digitaliseerimise töö leidmine",
+      serviceType: "Äriprotsessi digitaliseerimine, vana tarkvara korrastamine, Exceli ja paberi asendamine",
+      provider: { "@id": "https://digitaliseerimine.ee/#organization" },
+      areaServed: "EE",
+      audience: {
+        "@type": "Audience",
+        audienceType: "Eesti väike- ja keskmise ettevõtte omanikud"
+      },
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Esmane omaniku vastus",
+          price: "0",
+          priceCurrency: "EUR"
+        },
+        {
+          "@type": "Offer",
+          name: "Väike digitaliseerimise plaan",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: "390",
+            priceCurrency: "EUR"
+          }
+        },
+        {
+          "@type": "Offer",
+          name: "Väike praktiline teostus",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: "900",
+            priceCurrency: "EUR"
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digitaliseerimine.ee | Esimene praktiline samm paberilt ja Excelist edasi</title>
+    <meta
+      name="description"
+      content="Aitame ettevõtte omanikul leida ühe töö, mida tasub esimesena digitaliseerida: paber, Excel, vana tarkvara, käsitsi sisestamine või aeglane info liikumine."
+    />
+    <link rel="canonical" href="https://digitaliseerimine.ee/" />
+    <meta property="og:title" content="Digitaliseerimine.ee | Üks töö ettevõttes lihtsamaks" />
+    <meta
+      property="og:description"
+      content="Kirjeldage üks tüütu käsitöö. Saate 1 tööpäeva jooksul lihtsa omaniku vastuse: mis töö võtta esimesena, mis see võiks olla ja kas toetuse kontroll on mõistlik."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://digitaliseerimine.ee/" />
+    <meta property="og:image" content="https://digitaliseerimine.ee/hero-digitaliseerimine.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Digitaliseerimine.ee</a>
+        <div class="navlinks">
+          <a href="#mure">Mured</a>
+          <a href="#vastus">Mida saate</a>
+          <a href="#hinnad">Hinnad</a>
+          <a href="/vanad-protsessid/">Vanad protsessid</a>
+          <a href="/toetused/">Toetused</a>
+          <a href="/faq/">FAQ</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <span class="eyebrow">Paber, Excel ja vana tarkvara ei pea ettevõtet pidurdama</span>
+          <h1>Leidke üks töö, mida tasub ettevõttes esimesena digitaliseerida</h1>
+          <p>
+            Kui ettevõte on töötanud 20-30 aastat, on paljud harjumused õigusega alles.
+            Küsimus ei ole moodsas sõnas. Küsimus on selles, kus kaob iga nädal aeg, raha ja rahu.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#kontakt" data-track-event="cta_click" data-track-label="hero_first_work">Saan esimese soovituse</a>
+            <a class="btn btn-secondary" href="tel:+37258180435" data-track-event="phone_click" data-track-label="hero_phone">Helista +372 5818 0435</a>
+          </div>
+          <div class="proof">
+            <div><strong>1 töö</strong><span>valime esimese koha, mitte kogu ettevõtet korraga</span></div>
+            <div><strong>1 tööpäev</strong><span>esmane omaniku vastus pärast vormi</span></div>
+            <div><strong>selge hind</strong><span>väike plaan alates 390 €, teostus alates 900 €</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="mure" class="white">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Kust tavaliselt raha kaob</span>
+            <h2>Digitaliseerimine algab ühest tüütust tööst, mitte suurest IT-projektist.</h2>
+            <p>
+              Paljudes heas Eesti ettevõttes on tellimused, kliendiinfo, töölehed või aruanded endiselt
+              paberi, Exceli, e-maili ja vana tarkvara vahel laiali. See ei ole häbiasi. Aga seda saab rahulikult parandada.
+            </p>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <span class="stat">01</span>
+              <h3>Sama info sisestatakse mitu korda</h3>
+              <p>Tellimus tuleb e-maili, kantakse Excelisse, siis arveprogrammi ja lõpuks veel aruandesse.</p>
+            </article>
+            <article class="card">
+              <span class="stat">02</span>
+              <h3>Omanik peab ise asju taga ajama</h3>
+              <p>Info ei liigu õigel ajal õigesse kohta. Vastused sõltuvad sellest, kellel oli aega helistada.</p>
+            </article>
+            <article class="card">
+              <span class="stat">03</span>
+              <h3>Vana tarkvara teeb töö aeglaseks</h3>
+              <p>Süsteem on tuttav, aga ei räägi teiste tööriistadega. Inimesed parandavad seda käsitsi.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sky">
+        <div class="section-inner offer">
+          <div>
+            <span class="kicker">Meie fookus</span>
+            <h2>Leiame väikese töö, mille korda tegemine annab omanikule kiiresti selgust.</h2>
+            <p>
+              Me ei alusta küsimusega, millist programmi osta. Alustame küsimusega:
+              milline korduv töö tekitab täna kõige rohkem raiskamist või segadust?
+            </p>
+            <ul class="pain-list">
+              <li>paberi või PDF-i pealt andmete ümberkirjutamine</li>
+              <li>Exceli tabel, mida ainult üks inimene päriselt mõistab</li>
+              <li>kliendi päringud, millele vastamine venib</li>
+              <li>tööde ülevaade, mis on omaniku peas, märkmikus või mitmes failis</li>
+              <li>vana tarkvara, mille juurde on vaja lihtsat vormi, andmebaasi või teavitust</li>
+            </ul>
+          </div>
+          <aside class="sample" id="vastus">
+            <div class="sample-top">
+              <strong>Näidis: omaniku vastus</strong>
+              <span>1 tööpäev</span>
+            </div>
+            <div class="sample-body">
+              <span class="tag">Esimene mõistlik töö</span>
+              <h3>Tellimuse info ühest kohast läbi.</h3>
+              <p>
+                Ärge alustage kogu tarkvara vahetamisest. Alustage vormist ja automaatsest teavitusest,
+                mis vähendab ümberkirjutamist ja näitab, kas suurem muutus tasub ära.
+              </p>
+              <div class="sample-row"><span>Maht</span><strong>Väike praktiline töö</strong></div>
+              <div class="sample-row"><span>Hind</span><strong>alates 900 € + KM</strong></div>
+              <div class="sample-row"><span>Toetus</span><strong>kontrollida RTE või digiteekaardi võimalust</strong></div>
+              <div class="inline-actions">
+                <a class="btn btn-primary" href="#kontakt" data-track-event="cta_click" data-track-label="sample_start">Soovin sellist vastust</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="graphite">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Kuidas liigume</span>
+            <h2>Väikese ja kontrollitud sammuga.</h2>
+            <p>Hea omaniku jaoks on tähtis, et esimene samm ei muutuks avatud otsaga kuluks.</p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <strong>01</strong>
+              <div>
+                <h3>Kirjeldate ühe tüütu töö</h3>
+                <p>Ei pea teadma lahendust. Piisab sellest, et kirjeldate, kus töö täna venib või dubleerib.</p>
+              </div>
+            </div>
+            <div class="step">
+              <strong>02</strong>
+              <div>
+                <h3>Anname esimese omaniku vastuse</h3>
+                <p>Ütleme, kas see tundub väike automaatika, andmete korrastamine, tarkvara liidestus või toetuse kontroll.</p>
+              </div>
+            </div>
+            <div class="step">
+              <strong>03</strong>
+              <div>
+                <h3>Otsustate, kas jätkata</h3>
+                <p>Kui jätkame, paneme piiratud mahu, hinna ja järgmise kontrollpunkti paika enne töö alustamist.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="hinnad" class="white">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Hinnad</span>
+            <h2>Kolm lihtsat taset, et omanik teaks, millega arvestada.</h2>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <span class="stat">0 €</span>
+              <h3>Esmane omaniku vastus</h3>
+              <p>Kirjeldate ühe töö. Saate 1 tööpäeva jooksul lühikese soovituse ja järgmise sammu.</p>
+              <ul class="check">
+                <li>kas see koht tasub ette võtta</li>
+                <li>mis info on puudu</li>
+                <li>kas toetuse kontroll on mõistlik</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="stat">390 €</span>
+              <h3>Väike digitaliseerimise plaan</h3>
+              <p>Ühe töö lühike kirjeldus, lahenduse loogika, eelarve vahemik ja otsus, kas jätkata.</p>
+              <ul class="check">
+                <li>üks töö protsessina kirjas</li>
+                <li>lahenduse variant ja riskid</li>
+                <li>järgmise töö hinna raam</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="stat">900 €</span>
+              <h3>Väike praktiline teostus</h3>
+              <p>Piiratud mahus vorm, andmebaas, automaatne teavitus, CRM-i korrastus või lihtne liidestus.</p>
+              <ul class="check">
+                <li>töömaht enne alustamist kokku lepitud</li>
+                <li>test enne kasutusse andmist</li>
+                <li>omanikule arusaadav üleandmine</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sky">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Toetused</span>
+            <h2>Mõnikord saab töö siduda toetusega, aga sellest ei tasu alustada pimesi.</h2>
+            <p>
+              Kui töö tundub toetuse jaoks sobiv, suuname edasi täpsemasse kontrolli.
+              Digiteekaardi ja EIS-i eelhindamiseks kasutame eraldi lehte.
+            </p>
+            <div class="inline-actions">
+              <a class="btn btn-primary" href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="support_digiteekaart">Kontrolli digiteekaardi võimalust</a>
+              <a class="btn btn-light" href="/toetused/" data-track-event="cta_click" data-track-label="support_page">Loe toetustest lihtsas keeles</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakt" class="lead-section">
+        <div class="section-inner lead-grid">
+          <div>
+            <span class="kicker">Alustame ühest kohast</span>
+            <h2>Kirjeldage üks töö, mis võtab liiga palju aega.</h2>
+            <p>
+              Vastame ühe tööpäeva jooksul. Kui on kiire, helistage:
+              <a href="tel:+37258180435" data-track-event="phone_click" data-track-label="lead_section_phone">+372 5818 0435</a>.
+            </p>
+            <ul class="check">
+              <li>me ei saada teid kohe suurt süsteemi ostma</li>
+              <li>me ütleme, kui enne tuleb info korda teha</li>
+              <li>me pakume väikest esimest sammu, kui see on mõistlik</li>
+            </ul>
+          </div>
+
+          <div class="lead-card">
+            <form id="lead-form" data-site-lead-form data-source-site="digitaliseerimine.ee">
+              <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true" />
+              <div class="form-grid">
+                <div class="field">
+                  <label for="company">Ettevõte *</label>
+                  <input id="company" name="company" autocomplete="organization" required placeholder="Ettevõtte nimi" />
+                </div>
+                <div class="field">
+                  <label for="name">Nimi *</label>
+                  <input id="name" name="name" autocomplete="name" required placeholder="Kuidas teie poole pöörduda" />
+                </div>
+                <div class="field">
+                  <label for="email">E-mail *</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required placeholder="teie@ettevote.ee" />
+                </div>
+                <div class="field">
+                  <label for="phone">Telefon</label>
+                  <input id="phone" name="phone" autocomplete="tel" placeholder="+372 ..." />
+                </div>
+                <div class="field">
+                  <label for="size">Ettevõtte suurus</label>
+                  <select id="size" name="size">
+                    <option value="">Valige</option>
+                    <option>1-10 inimest</option>
+                    <option>11-50 inimest</option>
+                    <option>51-250 inimest</option>
+                    <option>250+ inimest</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="frequency">Kui tihti seda tööd tehakse?</label>
+                  <select id="frequency" name="frequency">
+                    <option value="">Valige</option>
+                    <option>Iga päev</option>
+                    <option>Mitu korda nädalas</option>
+                    <option>Mõned korrad kuus</option>
+                    <option>Hooajaliselt</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label for="problem">Mis töö võtab praegu liiga palju aega? *</label>
+                  <textarea id="problem" name="problem" required placeholder="Näiteks: tellimused tulevad e-maili, siis kirjutame Excelisse ja hiljem arveprogrammi."></textarea>
+                </div>
+                <div class="field full">
+                  <label for="systems">Kus see info praegu liigub?</label>
+                  <input id="systems" name="systems" placeholder="Paber, Excel, e-mail, vana tarkvara, CRM, raamatupidamisprogramm..." />
+                </div>
+                <div class="field full">
+                  <label for="support">Kas soovite ka toetuse võimaluse kontrolli?</label>
+                  <select id="support" name="support">
+                    <option>Jah, kui see võib sobida</option>
+                    <option>Praegu mitte, tahan ainult töö korda saada</option>
+                    <option>Ei tea</option>
+                  </select>
+                </div>
+              </div>
+              <label class="consent">
+                <input type="checkbox" name="consent" required />
+                <span>Nõustun, et Ettevõtluskeskus OÜ kasutab neid andmeid minu päringule vastamiseks. Soovi korral võite saata infot sobivate toetuste ja praktiliste digitaliseerimise võimaluste kohta.</span>
+              </label>
+              <button class="btn btn-primary" type="submit">Saada päring</button>
+              <p class="form-note">Vastame ühe tööpäeva jooksul. Kontaktandmeid ei müüda ega anta kolmandatele osapooltele.</p>
+              <p class="status-text" id="form-status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script is:inline define:vars={{ leadWebhookUrl, emailHref }}>
+      const form = document.querySelector("#lead-form");
+      const statusEl = document.querySelector("#form-status");
+
+      const getAttribution = () => {
+        if (typeof window.digitaliseerimineGetAttribution === "function") {
+          return window.digitaliseerimineGetAttribution();
+        }
+        return {};
+      };
+
+      const getLastCta = () => {
+        if (typeof window.digitaliseerimineGetLastCta === "function") {
+          return window.digitaliseerimineGetLastCta();
+        }
+        return {};
+      };
+
+      const track = (eventName, params = {}) => {
+        if (typeof window.digitaliseerimineTrack === "function") {
+          window.digitaliseerimineTrack(eventName, params);
+        }
+      };
+
+      const toPlainText = (payload) => {
+        return [
+          "Digitaliseerimine.ee päring",
+          "",
+          `Ettevõte: ${payload.company}`,
+          `Nimi: ${payload.name}`,
+          `E-mail: ${payload.email}`,
+          `Telefon: ${payload.phone || "-"}`,
+          `Suurus: ${payload.size || "-"}`,
+          `Sagedus: ${payload.frequency || "-"}`,
+          `Kus info liigub: ${payload.systems || "-"}`,
+          `Toetuse kontroll: ${payload.support || "-"}`,
+          "",
+          "Töö kirjeldus:",
+          payload.problem,
+          "",
+          "Attribution:",
+          `Landing: ${payload.attribution?.landingPage || "-"}`,
+          `UTM source: ${payload.attribution?.utm_source || "-"}`,
+          `UTM campaign: ${payload.attribution?.utm_campaign || "-"}`,
+          `Last CTA: ${payload.lastCta?.cta_label || "-"}`
+        ].join("\n");
+      };
+
+      const mailFallback = (payload) => {
+        const body = encodeURIComponent(toPlainText(payload));
+        window.location.href = `${emailHref}&body=${body}`;
+      };
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        if (formData.get("website")) return;
+
+        const payload = {
+          source_site: "digitaliseerimine.ee",
+          submitted_at: new Date().toISOString(),
+          company: String(formData.get("company") || "").trim(),
+          name: String(formData.get("name") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+          size: String(formData.get("size") || "").trim(),
+          frequency: String(formData.get("frequency") || "").trim(),
+          problem: String(formData.get("problem") || "").trim(),
+          systems: String(formData.get("systems") || "").trim(),
+          support: String(formData.get("support") || "").trim(),
+          consent: Boolean(formData.get("consent")),
+          attribution: getAttribution(),
+          lastCta: getLastCta()
+        };
+
+        track("lead_form_submit_attempt", {
+          form_name: "digitaliseerimine_esimene_too",
+          company_size: payload.size,
+          support_interest: payload.support
+        });
+
+        statusEl.textContent = "Saadan...";
+
+        if (!leadWebhookUrl) {
+          track("lead_form_submit", {
+            form_name: "digitaliseerimine_esimene_too",
+            submit_mode: "mailto"
+          });
+          statusEl.textContent = "Avan e-maili akna, et päring teele panna.";
+          mailFallback(payload);
+          return;
+        }
+
+        try {
+          const response = await fetch(leadWebhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) throw new Error(`Webhook failed: ${response.status}`);
+
+          track("lead_form_submit", {
+            form_name: "digitaliseerimine_esimene_too",
+            submit_mode: "webhook"
+          });
+          form.reset();
+          statusEl.textContent = "Aitäh. Päring on käes. Vastame ühe tööpäeva jooksul.";
+        } catch {
+          track("lead_form_submit", {
+            form_name: "digitaliseerimine_esimene_too",
+            submit_mode: "mailto_fallback"
+          });
+          statusEl.textContent = "Automaatne saatmine ei õnnestunud. Avan e-maili varuvariandi.";
+          mailFallback(payload);
+        }
+      });
+    </script>
+  </body>
+</html>

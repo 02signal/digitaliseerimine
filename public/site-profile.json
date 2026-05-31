@@ -1,0 +1,49 @@
+{
+  "site": "https://digitaliseerimine.ee",
+  "name": "Digitaliseerimine.ee",
+  "legal_owner": "Ettevõtluskeskus OÜ",
+  "language": "et",
+  "country": "EE",
+  "contact": {
+    "email": "info@02signal.ai",
+    "phone": "+37258180435"
+  },
+  "audience": [
+    "Eesti väike- ja keskmise ettevõtte omanikud",
+    "20-30 aastat tegutsenud ettevõtted",
+    "ettevõtted, kus protsessid on paberi, Exceli, e-maili ja vana tarkvara vahel"
+  ],
+  "positioning": "Leida üks praktiline töö, mida tasub ettevõttes esimesena digitaliseerida.",
+  "offers": [
+    {
+      "name": "Esmane omaniku vastus",
+      "price_eur": 0,
+      "delivery": "1 tööpäev"
+    },
+    {
+      "name": "Väike digitaliseerimise plaan",
+      "from_price_eur": 390,
+      "vat": "not included"
+    },
+    {
+      "name": "Väike praktiline teostus",
+      "from_price_eur": 900,
+      "vat": "not included"
+    }
+  ],
+  "conversion_events": [
+    "lead_form_start",
+    "lead_form_submit_attempt",
+    "lead_form_submit",
+    "phone_click",
+    "email_click",
+    "partner_site_click",
+    "cta_click"
+  ],
+  "related_sites": [
+    {
+      "site": "https://digiteekaart.ee",
+      "purpose": "EIS digitaliseerimise teekaardi eelhindamine"
+    }
+  ]
+}

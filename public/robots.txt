@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digitaliseerimine.ee/sitemap-index.xml
+
+# Agentidele ja LLM-idele:
+# Kokkuvõte: https://digitaliseerimine.ee/llms.txt
+# Struktureeritud profiil: https://digitaliseerimine.ee/site-profile.json

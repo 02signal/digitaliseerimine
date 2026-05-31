@@ -1,0 +1,89 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const faq = [
+  {
+    q: "Kas ma pean teadma, millist tarkvara mul vaja on?",
+    a: "Ei pea. Kirjeldage töö, mis täna aega raiskab. Meie aitame aru saada, kas vaja on vormi, andmebaasi, CRM-i korrastust, liidestust, automaatikat või lihtsalt paremat töökorraldust."
+  },
+  {
+    q: "Kas digitaliseerimine tähendab suurt IT-projekti?",
+    a: "Ei pea tähendama. Meie esimene soovitus on alustada ühest korduvast tööst, mille tulemust saab kontrollida ja mille maht on piiratud."
+  },
+  {
+    q: "Kas vana tarkvara peab välja vahetama?",
+    a: "Mitte alati. Tihti on mõistlik vana süsteem alles jätta ja teha selle ümber lihtsam sisend, väljund, teavitus või andmete ülevaade."
+  },
+  {
+    q: "Kas selleks saab toetust kasutada?",
+    a: "Mõnikord saab, mõnikord mitte. Esmalt vaatame töö ja ettevõtte olukorda. Kui toetus tundub mõistlik, suuname täpsemasse kontrolli digiteekaart.ee kaudu."
+  },
+  {
+    q: "Kui kiiresti saan vastuse?",
+    a: "Esmase omaniku vastuse anname ühe tööpäeva jooksul pärast vormi saatmist."
+  },
+  {
+    q: "Mis on väikse töö hind?",
+    a: "Väike digitaliseerimise plaan algab 390 eurost + KM. Väike praktiline teostus algab 900 eurost + KM. Täpne hind sõltub sellest, kui selge on töö ja kui palju süsteeme tuleb puudutada."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a
+    }
+  }))
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KKK | Digitaliseerimine.ee</title>
+    <meta name="description" content="Lühivastused ettevõtte omanikule: kust alustada digitaliseerimist, kas vana tarkvara peab vahetama ja millal toetust kontrollida." />
+    <link rel="canonical" href="https://digitaliseerimine.ee/faq/" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Digitaliseerimine.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/vanad-protsessid/">Vanad protsessid</a>
+          <a href="/toetused/">Toetused</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page white">
+      <div class="section-inner article">
+        <span class="kicker">Küsimused</span>
+        <h1>Lühivastused enne esimese töö valimist.</h1>
+        {faq.map((item) => (
+          <section class="card" style="margin-top:16px;padding:22px 22px;">
+            <h2 style="margin-top:0;font-size:1.35rem;">{item.q}</h2>
+            <p>{item.a}</p>
+          </section>
+        ))}
+        <div class="inline-actions">
+          <a class="btn btn-primary" href="/#kontakt" data-track-event="cta_click" data-track-label="faq_start">Saan esimese soovituse</a>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>

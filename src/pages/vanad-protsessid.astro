@@ -1,0 +1,77 @@
+---
+import Analytics from "../components/Analytics.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanad protsessid korda | Digitaliseerimine.ee</title>
+    <meta name="description" content="Kuidas alustada ettevõtte digitaliseerimist, kui töö käib endiselt paberi, Exceli, e-maili ja vana tarkvara vahel." />
+    <link rel="canonical" href="https://digitaliseerimine.ee/vanad-protsessid/" />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Digitaliseerimine.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/toetused/">Toetused</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="small-page white">
+      <div class="section-inner article">
+        <span class="kicker">Paberilt ja Excelist edasi</span>
+        <h1>Kui ettevõte on vana ja töötab, ei pea kõike korraga ümber tegema.</h1>
+        <p>
+          20-30 aastat töötanud ettevõttes on palju tarkust inimeste peas. Tihti on probleem selles,
+          et sama tarkus ei ole enam süsteemis: tellimused on e-mailis, töölehed paberil, aruanded Excelis
+          ja vana tarkvara teeb ainult osa tööst.
+        </p>
+
+        <h2>Millest mitte alustada</h2>
+        <ul>
+          <li>Ärge alustage kogu tarkvara vahetamisest, kui esimene valu on väike ja konkreetne.</li>
+          <li>Ärge ostke uut süsteemi enne, kui üks korduv töö on selgelt kirjeldatud.</li>
+          <li>Ärge automatiseerige segadust. Kui info on valesti, liigub vale info lihtsalt kiiremini.</li>
+        </ul>
+
+        <h2>Millest alustada</h2>
+        <p>
+          Valige üks töö, mida tehakse iga nädal ja mis vajab täna käsitsi ümberkirjutamist,
+          tagaajamist või kontrollimist. Sellest saab esimene digitaliseerimise kandidaat.
+        </p>
+        <ul>
+          <li>üks sisend: kust info tuleb;</li>
+          <li>üks väljund: mida peab lõpuks nägema või tegema;</li>
+          <li>üks vastutaja: kes ütleb, kas tulemus on õige;</li>
+          <li>üks piiratud katse: mitte kogu ettevõtte projekt.</li>
+        </ul>
+
+        <h2>Hea esimese töö näited</h2>
+        <ul>
+          <li>päring vormist või e-mailist läheb õigesse tabelisse ja õigetele inimestele;</li>
+          <li>tööleht täidetakse telefonis, mitte paberil;</li>
+          <li>kliendile saadetakse automaatne kinnitus ja sisemine teavitus;</li>
+          <li>Exceli ülevaatest tehakse lihtne juhile arusaadav vaade;</li>
+          <li>vana tarkvara juurde luuakse väike liidestus või eksport.</li>
+        </ul>
+
+        <div class="inline-actions">
+          <a class="btn btn-primary" href="/#kontakt" data-track-event="cta_click" data-track-label="old_processes_start">Kirjeldan ühe töö</a>
+          <a class="btn btn-light" href="tel:+37258180435" data-track-event="phone_click" data-track-label="old_processes_phone">Helistan ja küsin</a>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>
