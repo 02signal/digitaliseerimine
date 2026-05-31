@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.digitaliseerimine.ee"
+        }
+      ],
+      "destination": "https://digitaliseerimine.ee/:path*",
+      "permanent": true
+    }
+  ]
+}
