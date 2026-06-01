@@ -1,15 +1,15 @@
 :root {
-  --ink: #17202a;
-  --graphite: #24313d;
-  --green: #0b7f68;
-  --green-dark: #075846;
-  --copper: #b86b3c;
-  --sky: #eaf4f8;
-  --paper: #f5f7f8;
+  --ink: #1f252b;
+  --graphite: #2f3942;
+  --green: #13756c;
+  --green-dark: #0c4a46;
+  --copper: #b46a3c;
+  --sky: #edf3f1;
+  --paper: #f4f1ea;
   --white: #ffffff;
-  --muted: #5f6b76;
-  --line: #d9e1e6;
-  --shadow: 0 18px 46px rgba(23, 32, 42, 0.12);
+  --muted: #687078;
+  --line: #ddd7ca;
+  --shadow: 0 18px 46px rgba(31, 37, 43, 0.13);
 }
 
 * {
@@ -84,7 +84,7 @@ textarea {
   display: flex;
   align-items: center;
   background:
-    linear-gradient(90deg, rgba(23, 32, 42, 0.96) 0%, rgba(23, 32, 42, 0.86) 44%, rgba(23, 32, 42, 0.42) 72%),
+    linear-gradient(90deg, rgba(22, 28, 34, 0.96) 0%, rgba(22, 28, 34, 0.84) 44%, rgba(22, 28, 34, 0.34) 74%),
     url("/hero-digitaliseerimine.png") center right / cover no-repeat;
   color: var(--white);
 }
@@ -193,6 +193,32 @@ h1 {
   display: block;
   color: rgba(255, 255, 255, 0.76);
   font-size: 0.9rem;
+}
+
+.process-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  max-width: 900px;
+  margin-top: 18px;
+}
+
+.process-strip span,
+.process-strip strong {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-weight: 820;
+}
+
+.process-strip strong {
+  color: #f5c19a;
 }
 
 section {
@@ -544,7 +570,7 @@ section {
   .hero {
     min-height: auto;
     background:
-      linear-gradient(180deg, rgba(23, 32, 42, 0.97) 0%, rgba(23, 32, 42, 0.9) 100%),
+      linear-gradient(180deg, rgba(22, 28, 34, 0.97) 0%, rgba(22, 28, 34, 0.9) 100%),
       url("/hero-digitaliseerimine.png") center / cover no-repeat;
   }
 
@@ -559,5 +585,9 @@ section {
 
   .field.full {
     grid-column: auto;
+  }
+
+  .process-strip {
+    align-items: stretch;
   }
 }
