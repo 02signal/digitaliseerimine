@@ -431,6 +431,76 @@ section {
   font-weight: 760;
 }
 
+.tool-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.tool-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.tool-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tool-fields label {
+  display: grid;
+  gap: 8px;
+  color: var(--graphite);
+  font-weight: 820;
+}
+
+.tool-fields span {
+  min-height: 48px;
+}
+
+.tool-fields input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.tool-card > .btn {
+  margin-top: 18px;
+}
+
+.tool-result {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: var(--white);
+}
+
+.tool-result h3 {
+  margin-top: 10px;
+  color: var(--graphite);
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+}
+
+.tool-result p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.btn-secondary.dark {
+  background: var(--graphite);
+  color: var(--white);
+  border-color: var(--graphite);
+}
+
 .lead-section {
   background: var(--graphite);
   color: var(--white);
@@ -575,11 +645,13 @@ section {
   }
 
   .proof,
-  .grid-3,
-  .grid-2,
-  .offer,
-  .lead-grid,
-  .form-grid {
+    .grid-3,
+    .grid-2,
+    .offer,
+    .tool-grid,
+    .tool-fields,
+    .lead-grid,
+    .form-grid {
     grid-template-columns: 1fr;
   }
 

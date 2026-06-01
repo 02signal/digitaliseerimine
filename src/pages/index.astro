@@ -105,6 +105,7 @@ const schema = {
         <div class="navlinks">
           <a href="#mure">Mured</a>
           <a href="#vastus">Mida saate</a>
+          <a href="#kalkulaator">Kalkulaator</a>
           <a href="#hinnad">Hinnad</a>
           <a href="/vanad-protsessid/">Vanad protsessid</a>
           <a href="/toetused/">Toetused</a>
@@ -170,6 +171,51 @@ const schema = {
               <h3>Vana tarkvara teeb töö aeglaseks</h3>
               <p>Süsteem on tuttav, aga ei räägi teiste tööriistadega. Inimesed parandavad seda käsitsi.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kalkulaator" class="white">
+        <div class="section-inner tool-grid">
+          <div>
+            <span class="kicker">Kiire arvutus</span>
+            <h2>Kui palju üks käsitöö tegelikult maksab?</h2>
+            <p>
+              Omaniku jaoks on tähtis lihtne pilt: mitu tundi kuus kaob ja kas seda tasub üldse ette võtta.
+              Sisestage ühe korduva töö ligikaudsed numbrid.
+            </p>
+            <ul class="check">
+              <li>ei ole raamatupidamislik täpne arvestus</li>
+              <li>aitab otsustada, kas teema väärib kõnet</li>
+              <li>kõige parem on alustada tööst, mis kordub iga nädal</li>
+            </ul>
+          </div>
+
+          <div class="tool-card" data-manual-cost-tool>
+            <div class="tool-fields">
+              <label>
+                <span>Mitu korda nädalas seda tehakse?</span>
+                <input type="number" min="1" max="500" value="10" data-manual-input="weeklyCount" />
+              </label>
+              <label>
+                <span>Mitu minutit üks kord võtab?</span>
+                <input type="number" min="1" max="480" value="15" data-manual-input="minutesPerTask" />
+              </label>
+              <label>
+                <span>Kui palju maksab üks töötund?</span>
+                <input type="number" min="5" max="120" value="20" data-manual-input="hourlyCost" />
+              </label>
+            </div>
+            <button class="btn btn-primary" type="button" data-manual-calculate>Arvuta ligikaudne kadu</button>
+            <div class="tool-result" data-manual-result>
+              <span class="tag">Näidis</span>
+              <h3>Umbes 11 tundi kuus</h3>
+              <p>See teeb ligikaudu 220 € kuus. Kui töö on tüütu ja kordub iga nädal, tasub see rahulikult üle vaadata.</p>
+            </div>
+            <div class="inline-actions">
+              <a class="btn btn-light" href="#kontakt" data-track-event="cta_click" data-track-label="manual_cost_contact">Küsin selle töö kohta</a>
+              <a class="btn btn-secondary dark" href="tel:+37258180435" data-track-event="phone_click" data-track-label="manual_cost_phone">Helista</a>
+            </div>
           </div>
         </div>
       </section>
@@ -445,6 +491,77 @@ const schema = {
         const body = encodeURIComponent(toPlainText(payload));
         window.location.href = `${emailHref}&body=${body}`;
       };
+
+      const costTool = document.querySelector("[data-manual-cost-tool]");
+      const resultBox = document.querySelector("[data-manual-result]");
+      const calculateButton = document.querySelector("[data-manual-calculate]");
+      let costToolStarted = false;
+
+      const numberValue = (name) => {
+        const input = document.querySelector(`[data-manual-input="${name}"]`);
+        const value = Number(input?.value || 0);
+        return Number.isFinite(value) ? value : 0;
+      };
+
+      const classifyManualCost = (monthlyHours, monthlyCost) => {
+        if (monthlyHours >= 20 || monthlyCost >= 600) return "tugev";
+        if (monthlyHours >= 8 || monthlyCost >= 250) return "tasub_vaadata";
+        return "väike";
+      };
+
+      costTool?.addEventListener("input", () => {
+        if (costToolStarted) return;
+        costToolStarted = true;
+        track("tool_start", {
+          tool_name: "manual_work_cost_calculator",
+          source_site: "digitaliseerimine.ee"
+        });
+      });
+
+      calculateButton?.addEventListener("click", () => {
+        const weeklyCount = Math.max(1, numberValue("weeklyCount"));
+        const minutesPerTask = Math.max(1, numberValue("minutesPerTask"));
+        const hourlyCost = Math.max(1, numberValue("hourlyCost"));
+        const monthlyHours = Math.round((weeklyCount * minutesPerTask * 4.33) / 60);
+        const monthlyCost = Math.round(monthlyHours * hourlyCost);
+        const resultTier = classifyManualCost(monthlyHours, monthlyCost);
+
+        const title = resultTier === "tugev"
+          ? "See töö väärib tõenäoliselt kiiret ülevaatust"
+          : resultTier === "tasub_vaadata"
+            ? "Seda tööd tasub rahulikult vaadata"
+            : "See on pigem väike koht";
+        const recommendation = resultTier === "tugev"
+          ? "Kui töö kordub nii palju, võib väike vorm, ühendus või automaatne teavitus anda kiiresti nähtava võidu."
+          : resultTier === "tasub_vaadata"
+            ? "Kui sama töö tekitab ka vigu või hilinemist, on see hea kandidaat esimeseks väikeseks digitaliseerimiseks."
+            : "Kui töö ei põhjusta vigu ega viivitusi, ei pruugi seda esimesena ette võtta.";
+
+        if (resultBox) {
+          resultBox.innerHTML = `
+            <span class="tag">${title}</span>
+            <h3>Umbes ${monthlyHours} tundi kuus</h3>
+            <p>Ligikaudne kulu on ${monthlyCost.toLocaleString("et-EE")} € kuus. ${recommendation}</p>
+          `;
+        }
+
+        track("tool_completed", {
+          tool_name: "manual_work_cost_calculator",
+          monthly_hours: monthlyHours,
+          monthly_cost: monthlyCost,
+          result_tier: resultTier,
+          source_site: "digitaliseerimine.ee"
+        });
+
+        if (resultTier !== "väike") {
+          track("result_high_intent", {
+            tool_name: "manual_work_cost_calculator",
+            result_tier: resultTier,
+            monthly_cost: monthlyCost,
+            source_site: "digitaliseerimine.ee"
+          });
+        }
+      });
 
       form?.addEventListener("submit", async (event) => {
         event.preventDefault();

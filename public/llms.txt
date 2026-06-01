@@ -5,6 +5,7 @@ Digitaliseerimine.ee on Ettevõtluskeskus OÜ müügi- ja nõustamisleht Eesti e
 Põhiline väärtuspakkumine:
 - aitame leida ühe töö, mida tasub ettevõttes esimesena digitaliseerida;
 - sobib ettevõttele, kus töö käib veel paberi, Exceli, e-maili ja vana tarkvara vahel;
+- lehel on käsitöö kulu kalkulaator, millega omanik saab hinnata ühe korduva töö ligikaudset ajakulu ja rahalist kadu;
 - anname 1 tööpäeva jooksul esmase omaniku vastuse;
 - vajadusel kontrollime, kas mõni toetus või digiteekaardi suund võib sobida.
 
@@ -27,6 +28,9 @@ Tüüpilised teemad:
 - vormid ja lihtne andmebaas;
 - CRM-i korrastus;
 - toetuse võimaluse esmane kontroll.
+
+Interaktiivne tööriist:
+- Käsitöö kulu kalkulaator: omanik sisestab, mitu korda nädalas töö kordub, mitu minutit see võtab ja ligikaudse töötunni hinna. Tulemuseks on kuine ajakulu ja ligikaudne kulu eurodes.
 
 Seotud sait:
 - Digiteekaart.ee on eraldi leht EIS digitaliseerimise teekaardi eelhindamiseks.
