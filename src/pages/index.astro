@@ -3,7 +3,6 @@ import Analytics from "../components/Analytics.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
-const leadWebhookUrl = import.meta.env.PUBLIC_SITE_LEAD_WEBHOOK_URL ?? "";
 const emailHref = "mailto:info@02signal.ai?subject=Digitaliseerimine.ee%20-%20esimese%20too%20soovitus";
 const schema = {
   "@context": "https://schema.org",
@@ -439,7 +438,7 @@ const schema = {
 
     <Footer />
 
-    <script is:inline define:vars={{ leadWebhookUrl, emailHref }}>
+    <script is:inline define:vars={{ emailHref }}>
       const form = document.querySelector("#lead-form");
       const statusEl = document.querySelector("#form-status");
 
@@ -563,6 +562,17 @@ const schema = {
         }
       });
 
+      // Carry the meaningful part of the form into the AMOS lead capture
+      // (context.field / context.outcomes on the envelope) so a subscriber
+      // arrives with what they told us, not an empty address. `field` is
+      // clipped to 64 chars server-side; each outcome to 240.
+      const toAmosOutcomes = (payload) => [
+        payload.size ? `Ettevõtte suurus: ${payload.size}` : null,
+        payload.frequency ? `Sagedus: ${payload.frequency}` : null,
+        payload.systems ? `Kus info liigub: ${payload.systems}` : null,
+        payload.support ? `Toetuse kontroll: ${payload.support}` : null
+      ].filter(Boolean);
+
       form?.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(form);
@@ -593,28 +603,25 @@ const schema = {
 
         statusEl.textContent = "Saadan...";
 
-        if (!leadWebhookUrl) {
-          track("lead_form_submit", {
-            form_name: "digitaliseerimine_esimene_too",
-            submit_mode: "mailto"
-          });
-          statusEl.textContent = "Avan e-maili akna, et päring teele panna.";
-          mailFallback(payload);
-          return;
-        }
-
         try {
-          const response = await fetch(leadWebhookUrl, {
+          const response = await fetch("/api/subscribe", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+              kind: "topic_subscribe",
+              email: payload.email,
+              topic: "projekt",
+              field: payload.problem.slice(0, 64) || null,
+              outcomes: toAmosOutcomes(payload),
+              source_site: "funnel_digitaliseerimine"
+            })
           });
-
-          if (!response.ok) throw new Error(`Webhook failed: ${response.status}`);
+          const responseBody = await response.json().catch(() => null);
+          if (!response.ok || !responseBody?.ok) throw new Error(`AMOS capture failed: ${response.status}`);
 
           track("lead_form_submit", {
             form_name: "digitaliseerimine_esimene_too",
-            submit_mode: "webhook"
+            submit_mode: "amos"
           });
           form.reset();
           statusEl.textContent = "Aitäh. Päring on käes. Vastame ühe tööpäeva jooksul.";
