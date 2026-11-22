@@ -425,7 +425,7 @@ const schema = {
               </div>
               <label class="consent">
                 <input type="checkbox" name="consent" required />
-                <span>Nõustun, et Ettevõtluskeskus OÜ kasutab neid andmeid minu päringule vastamiseks. Soovi korral võite saata infot sobivate toetuste ja praktiliste digitaliseerimise võimaluste kohta.</span>
+                <span>Nõustun, et Ettevõtluskeskus OÜ kasutab neid andmeid minu päringule vastamiseks.</span>
               </label>
               <button class="btn btn-primary" type="submit">Saada päring</button>
               <p class="form-note">Vastame ühe tööpäeva jooksul. Kontaktandmeid ei müüda ega anta kolmandatele osapooltele.</p>
@@ -562,10 +562,8 @@ const schema = {
         }
       });
 
-      // Carry the meaningful part of the form into the AMOS lead capture
-      // (context.field / context.outcomes on the envelope) so a subscriber
-      // arrives with what they told us, not an empty address. `field` is
-      // clipped to 64 chars server-side; each outcome to 240.
+      // Form answers that go into request_summary of the AMOS b2b_inquiry
+      // (amos-ops#2416), so CS sees the need in the notice. Clipped to 600 server-side.
       const toAmosOutcomes = (payload) => [
         payload.size ? `Ettevõtte suurus: ${payload.size}` : null,
         payload.frequency ? `Sagedus: ${payload.frequency}` : null,
@@ -608,11 +606,15 @@ const schema = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              kind: "topic_subscribe",
+              // amos-ops#2416: lepingueelne päring → CS saab kohe teate (ettevõte, vajadus, e-post).
+              kind: "b2b_inquiry",
               email: payload.email,
               topic: "projekt",
-              field: payload.problem.slice(0, 64) || null,
-              outcomes: toAmosOutcomes(payload),
+              company_name: payload.company,
+              request_summary: [
+                payload.problem && `Töö: ${payload.problem}`,
+                ...toAmosOutcomes(payload),
+              ].filter(Boolean).join(" · ").slice(0, 600),
               source_site: "funnel_digitaliseerimine"
             })
           });
